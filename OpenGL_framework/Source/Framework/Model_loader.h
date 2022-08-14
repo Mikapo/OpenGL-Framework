@@ -1,0 +1,27 @@
+#pragma once
+
+#include "Buffers/Buffers.h"
+#include <array>
+#include <future>
+#include <memory>
+#include <optional>
+#include <string>
+#include <vector>
+
+struct aiMesh;
+struct aiScene;
+namespace OpenGL
+{
+    class Model_loader
+    {
+    public:
+        [[nodiscard]] static std::unique_ptr<Buffers> load(std::string_view file_path, size_t mesh_index);
+
+    private:
+        [[nodiscard]] static std::unique_ptr<Buffers> load_buffer(std::string_view file_path, size_t mesh_index = 0);
+        [[nodiscard]] static std::unique_ptr<Buffers> load_mesh_from_scene(const aiScene* scene, size_t index);
+        static void get_vertices(aiMesh* mesh, std::vector<float>& out_vecto);
+        static void get_indices(const aiMesh* mesh, std::vector<uint32_t>& out_vector);
+    };
+
+} // namespace OpenGL
