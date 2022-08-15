@@ -1,5 +1,4 @@
 #include "Model_loader.h"
-#include "Buffers/Vertex_buffer_layout.h"
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
@@ -44,9 +43,9 @@ std::unique_ptr<OpenGL::Buffers> OpenGL::Model_loader::load_mesh_from_scene(cons
     get_indices(mesh, indices);
 
     Vertex_buffer_layout layout;
-    layout.push<float>(3);
-    layout.push<float>(3);
-    layout.push<float>(2);
+    layout.push_float(3);
+    layout.push_float(3);
+    layout.push_float(2);
 
     return std::make_unique<Buffers>(std::move(vertices), std::move(indices), std::move(layout));
 }

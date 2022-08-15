@@ -32,10 +32,10 @@ OpenGL::Vertex_buffer_layout OpenGL::Basic_geometry::create_2d_layout()
     Vertex_buffer_layout layout;
 
     // vertex position
-    layout.push<float>(2);
+    layout.push_float(2);
 
     // texture coordinates
-    layout.push<float>(2);
+    layout.push_float(2);
 
     return layout;
 }

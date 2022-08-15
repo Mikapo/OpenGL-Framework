@@ -1,13 +1,16 @@
+#include "GL/glew.h"
 
+#include "../layout/Vertex_buffer_layout.h"
 #include "Vertex_array.h"
-
 #include "Vertex_buffer.h"
-#include "Vertex_buffer_layout.h"
 
 OpenGL::Vertex_array::~Vertex_array()
 {
-    const uint32_t array_id = get_id();
-    glDeleteVertexArrays(1, &array_id);
+    if (has_been_initialized())
+    {
+        const uint32_t array_id = get_id();
+        glDeleteVertexArrays(1, &array_id);
+    }
 }
 
 void OpenGL::Vertex_array::add_buffer(const Vertex_buffer& vertex_buffer, const Vertex_buffer_layout& layout) const
@@ -16,6 +19,7 @@ void OpenGL::Vertex_array::add_buffer(const Vertex_buffer& vertex_buffer, const 
     vertex_buffer.bind();
     const auto& elements = layout.get_elements();
     uint32_t offset = 0;
+
     for (GLuint i = 0; i < elements.size(); i++)
     {
         const auto& element = elements.at(i);

@@ -1,9 +1,9 @@
 #pragma once
 
+#include "../Layout/Vertex_buffer_layout.h"
 #include "Index_buffer.h"
 #include "Vertex_array.h"
 #include "Vertex_buffer.h"
-#include "Vertex_buffer_layout.h"
 #include <memory>
 #include <vector>
 

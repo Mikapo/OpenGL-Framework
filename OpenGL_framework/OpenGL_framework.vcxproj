@@ -161,7 +161,6 @@
     <ClInclude Include="Source\Framework\Buffers\Index_buffer.h" />
     <ClInclude Include="Source\Framework\Buffers\Vertex_array.h" />
     <ClInclude Include="Source\Framework\Buffers\Vertex_buffer.h" />
-    <ClInclude Include="Source\Framework\Buffers\Vertex_buffer_layout.h" />
     <ClInclude Include="Source\Framework\Model_loader.h" />
     <ClInclude Include="Source\Framework\Renderer_item.h" />
     <ClInclude Include="Source\Framework\Shading\Default_shaders\2d_shader.h" />
@@ -454,6 +453,8 @@
     <ClInclude Include="Vendor\glm\vec4.hpp" />
     <ClInclude Include="Vendor\glm\vector_relational.hpp" />
     <ClInclude Include="Vendor\stb_image\stb_Image.h" />
+    <ClInclude Include="Source\Framework\Layout\Vertex_buffer_elements.h" />
+    <ClInclude Include="Source\Framework\Layout\Vertex_buffer_layout.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Framework\Buffers\Frame_buffer.cpp" />
@@ -477,6 +478,8 @@
     <ClCompile Include="Source\Framework\Texture\Textures.cpp" />
     <ClCompile Include="Vendor\glm\detail\glm.cpp" />
     <ClCompile Include="Vendor\stb_image\stb_image.cpp" />
+    <ClCompile Include="Source\Framework\Layout\Vertex_buffer_elements.cpp" />
+    <ClCompile Include="Source\Framework\Layout\Vertex_buffer_layout.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Vendor\glm\detail\func_common.inl" />

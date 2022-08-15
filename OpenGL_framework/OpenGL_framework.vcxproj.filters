@@ -27,9 +27,6 @@
     <ClInclude Include="Source\Framework\Buffers\Vertex_buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Buffers\Vertex_buffer_layout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Framework\Shading\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -930,6 +927,12 @@
     <ClInclude Include="Source\Framework\Buffers\Frame_buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Framework\Layout\Vertex_buffer_elements.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Framework\Layout\Vertex_buffer_layout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Framework\Buffers\Index_buffer.cpp">
@@ -993,6 +996,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Framework\Buffers\Frame_buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Framework\Layout\Vertex_buffer_elements.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Framework\Layout\Vertex_buffer_layout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
