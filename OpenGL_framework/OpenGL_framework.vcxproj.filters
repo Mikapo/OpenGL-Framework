@@ -927,6 +927,9 @@
     <ClInclude Include="Source\Framework\Texture\Textures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Framework\Buffers\Frame_buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Framework\Buffers\Index_buffer.cpp">
@@ -987,6 +990,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Framework\Texture\Textures.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Framework\Buffers\Frame_buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

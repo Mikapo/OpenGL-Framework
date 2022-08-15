@@ -4,20 +4,10 @@
 #include "Vertex_buffer.h"
 #include "Vertex_buffer_layout.h"
 
-OpenGL::Vertex_array::Vertex_array() noexcept
-{
-    uint32_t array_id = 0;
-    glGenVertexArrays(1, &array_id);
-    set_id(array_id);
-}
-
 OpenGL::Vertex_array::~Vertex_array()
 {
-    if (is_valid())
-    {
-        const uint32_t array_id = get_id();
-        glDeleteVertexArrays(1, &array_id);
-    }
+    const uint32_t array_id = get_id();
+    glDeleteVertexArrays(1, &array_id);
 }
 
 void OpenGL::Vertex_array::add_buffer(const Vertex_buffer& vertex_buffer, const Vertex_buffer_layout& layout) const
@@ -41,11 +31,18 @@ void OpenGL::Vertex_array::add_buffer(const Vertex_buffer& vertex_buffer, const 
 
 void OpenGL::Vertex_array::bind() const noexcept
 {
-    if (is_valid())
-        glBindVertexArray(get_id());
+    glBindVertexArray(get_id());
 }
 
-void OpenGL::Vertex_array::unbind() noexcept
+void OpenGL::Vertex_array::unbind() const noexcept
 {
     glBindVertexArray(0);
+}
+
+uint32_t OpenGL::Vertex_array::construct_item()
+{
+    uint32_t array_id = 0;
+    glGenVertexArrays(1, &array_id);
+
+    return array_id;
 }

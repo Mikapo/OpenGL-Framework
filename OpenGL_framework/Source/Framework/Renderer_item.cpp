@@ -1,31 +1,20 @@
 #include "Renderer_item.h"
 
+#include <stdexcept>
 #include <utility>
 
-OpenGL::Renderer_item::Renderer_item(Renderer_item&& other) noexcept
+void OpenGL::Renderer_item::initialize()
 {
-    *this = std::move(other);
+    if (m_has_been_initialized)
+        throw std::logic_error("Already initialized");
+
+    m_id = construct_item();
+    m_has_been_initialized = true;
 }
 
-OpenGL::Renderer_item& OpenGL::Renderer_item::operator=(Renderer_item&& other) noexcept
+bool OpenGL::Renderer_item::has_been_initialized() const noexcept
 {
-    m_id = other.m_id;
-    m_is_valid = other.m_is_valid;
-
-    other.m_id = 0;
-    other.m_is_valid = false;
-
-    return *this;
-}
-
-bool OpenGL::Renderer_item::is_valid() const noexcept
-{
-    return m_is_valid;
-}
-
-void OpenGL::Renderer_item::set_id(uint32_t new_id) noexcept
-{
-    m_id = new_id;
+    return m_has_been_initialized;
 }
 
 uint32_t OpenGL::Renderer_item::get_id() const noexcept

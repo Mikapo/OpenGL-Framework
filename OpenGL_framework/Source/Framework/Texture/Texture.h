@@ -12,24 +12,21 @@ namespace OpenGL
     class Texture : public Renderer_item
     {
     public:
-        Texture(Texture_buffer buffer);
+        Texture(Texture_buffer buffer, Texture_slot slot) noexcept;
         ~Texture() override;
         Texture(const Texture&) = delete;
-        Texture(Texture&&) = default;
+        Texture(Texture&&) = delete;
 
         Texture& operator=(const Texture&) = delete;
         Texture& operator=(Texture&&) = delete;
 
-        void bind(Texture_slot slot) noexcept;
-        void unbind() noexcept;
-        [[nodiscard]] bool has_local_buffer() const noexcept;
+        void bind() const noexcept override;
+        void unbind() const noexcept override;
 
     private:
-        void initialize() noexcept;
+        [[nodiscard]] uint32_t construct_item() override;
 
         Texture_buffer m_buffer;
-        bool m_has_been_initialized = false;
-        bool m_is_binded = false;
-        int32_t m_current_slot = -1;
+        Texture_slot m_slot = Texture_slot::color;
     };
 } // namespace OpenGL

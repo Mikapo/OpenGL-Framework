@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Framework\Buffers\Frame_buffer.h" />
     <ClInclude Include="Source\Framework\Demo.h" />
     <ClInclude Include="Source\Framework\Math.h" />
     <ClInclude Include="Source\Framework\Shading\Shaders.h" />
@@ -455,6 +456,7 @@
     <ClInclude Include="Vendor\stb_image\stb_Image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Framework\Buffers\Frame_buffer.cpp" />
     <ClCompile Include="Source\Framework\Demo.cpp" />
     <ClCompile Include="Source\Framework\Math.cpp" />
     <ClCompile Include="Source\Framework\Shading\Shaders.cpp" />

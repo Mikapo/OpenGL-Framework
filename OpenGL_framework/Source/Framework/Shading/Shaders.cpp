@@ -5,29 +5,29 @@
 #include <fstream>
 #include <sstream>
 
-std::unique_ptr<OpenGL::Shader> OpenGL::Shaders::compile_default_shader()
+std::unique_ptr<OpenGL::Shader> OpenGL::Shaders::compile_default_shader(bool initialize)
 {
-    std::unique_ptr shader = compile_shader(Default_shader_2d::Source::VERT, Default_shader_2d::Source::FRAG);
-
-    const glm::mat4 projection = glm::ortho(-1.0F, 1.0F, -1.0F, 1.0F);
-    shader->set_uniform(Default_shader_2d::Uniforms::PROJECTION, projection);
-
-    return shader;
+    return compile_shader(Default_shader_2d::Source::VERT, Default_shader_2d::Source::FRAG, initialize);
 }
 
 std::unique_ptr<OpenGL::Shader> OpenGL::Shaders::compile_shader_from_file(
-    std::string_view vert_path, std::string_view frag_path)
+    std::string_view vert_path, std::string_view frag_path, bool initialize)
 {
     const std::string vert_source = parse_shader(vert_path);
     const std::string frag_source = parse_shader(frag_path);
 
-    return compile_shader(vert_source, frag_source);
+    return compile_shader(vert_source, frag_source, initialize);
 }
 
 std::unique_ptr<OpenGL::Shader> OpenGL::Shaders::compile_shader(
-    std::string_view vert_shader, std::string_view frag_shader)
+    std::string_view vert_shader, std::string_view frag_shader, bool initialize)
 {
-    return std::make_unique<Shader>(vert_shader, frag_shader);
+    std::unique_ptr shader = std::make_unique<Shader>(vert_shader, frag_shader);
+
+    if (initialize)
+        shader->initialize();
+
+    return shader;
 }
 
 std::string OpenGL::Shaders::parse_shader(std::string_view file_path)

@@ -2,13 +2,9 @@
 
 #include "GL/glew.h"
 
-OpenGL::Index_buffer::Index_buffer(const void* data, size_t count) noexcept : m_count(count)
+OpenGL::Index_buffer::Index_buffer(std::vector<uint32_t> indices) noexcept
+    : m_count(indices.size()), m_local_buffer(std::move(indices))
 {
-    uint32_t buffer_id = 0;
-    glGenBuffers(1, &buffer_id);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer_id);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(sizeof(uint32_t) * count), data, GL_STATIC_DRAW);
-    set_id(buffer_id);
 }
 
 OpenGL::Index_buffer::~Index_buffer()
@@ -23,7 +19,7 @@ void OpenGL::Index_buffer::bind() const noexcept
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer_id);
 }
 
-void OpenGL::Index_buffer::unbind() noexcept
+void OpenGL::Index_buffer::unbind() const noexcept
 {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
@@ -31,4 +27,18 @@ void OpenGL::Index_buffer::unbind() noexcept
 size_t OpenGL::Index_buffer::get_count() const noexcept
 {
     return m_count;
+}
+
+uint32_t OpenGL::Index_buffer::construct_item()
+{
+    uint32_t buffer_id = 0;
+    glGenBuffers(1, &buffer_id);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer_id);
+    glBufferData(
+        GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(sizeof(uint32_t) * m_count), m_local_buffer.data(),
+        GL_STATIC_DRAW);
+
+    m_local_buffer.clear();
+
+    return buffer_id;
 }

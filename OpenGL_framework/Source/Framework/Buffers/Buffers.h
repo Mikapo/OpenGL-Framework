@@ -17,18 +17,12 @@ namespace OpenGL
         void bind();
         void unbind() const noexcept;
         [[nodiscard]] size_t get_indices_count() const noexcept;
-
-    private:
         void initialize();
 
-        bool m_has_been_initialized = false;
-        std::vector<float> m_vertices;
-        std::vector<uint32_t> m_indices;
+    private:
+        Vertex_buffer m_vertex_buffer;
+        Vertex_array m_vertex_array;
+        Index_buffer m_index_buffer;
         Vertex_buffer_layout m_layout;
-        size_t m_indices_amount = 0;
-
-        std::unique_ptr<Vertex_buffer> m_vb;
-        std::unique_ptr<Vertex_array> m_va;
-        std::unique_ptr<Index_buffer> m_ib;
     };
 } // namespace OpenGL
