@@ -1,4 +1,6 @@
 Checks: 'bugprone*,
+		abseil*,
+		fuchsia*,
 		clang-analyzer*,
 		cert*,
 		concurrency*,
@@ -15,7 +17,8 @@ Checks: 'bugprone*,
 		-*llvmlibc-implementation-in-namespace,
 		-*llvmlibc-restrict-system-libc-headers,
 		-*modernize-use-trailing-return-type,
-        -*-braces-around-statements'
+        -*-braces-around-statements
+		-*bugprone-easily_swappable_parameters
 		
 FormatStyle:     file
 

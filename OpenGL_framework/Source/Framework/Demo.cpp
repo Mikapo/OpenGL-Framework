@@ -18,18 +18,24 @@ void OpenGL::Demo::on_window_open([[maybe_unused]] GLFWwindow* window)
     m_square_buffers = Basic_geometry::create_square_buffers();
     m_triangle_buffers = Basic_geometry::create_triangle_buffers();
     m_shader = Shaders::compile_default_shader();
+
+    m_texture = Textures::load_texture_from_file("Test_texture.png");
+    m_texture->bind(Texture_slot::texture);
 }
 
 void OpenGL::Demo::render()
 {
-    glm::mat4 model = Math::calculate_model({0.5F, 0.5F}, 45.0F, {0.5F, 0.5F});
-    m_shader->set_uniform(Default_shader_2d::MODEL_UNIFORM, model);
+    glm::mat4 model = Math::calculate_model({0.4F, 0.4F}, 45.0F, {1.0F, 0.5F});
+    m_shader->set_uniform(Default_shader_2d::Uniforms::MODEL, model);
+    m_shader->set_uniform(Default_shader_2d::Uniforms::USES_TEXTURE, 1);
+    m_shader->set_sampler_uniform(Default_shader_2d::Uniforms::TEXTURE, Texture_slot::texture);
 
-    m_shader->set_uniform(Default_shader_2d::COLOR_UNIFORM, 0.0F, 1.0F, 0.0F, 1.0F);
     Renderer::draw(*m_square_buffers, *m_shader);
 
     model = Math::calculate_model({-0.3F, -0.3F});
-    m_shader->set_uniform(Default_shader_2d::MODEL_UNIFORM, model);
-    m_shader->set_uniform(Default_shader_2d::COLOR_UNIFORM, 1.0F, 0.0F, 0.0F, 1.0F);
+    m_shader->set_uniform(Default_shader_2d::Uniforms::MODEL, model);
+    m_shader->set_uniform(Default_shader_2d::Uniforms::USES_TEXTURE, 0);
+    m_shader->set_uniform(Default_shader_2d::Uniforms::COLOR, 1.0F, 0.0F, 0.0F, 1.0F);
+
     Renderer::draw(*m_triangle_buffers, *m_shader);
 }

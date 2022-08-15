@@ -1,17 +1,11 @@
-#include "Texture.h"
+#include "GL/glew.h"
 
-#include "stb_image/stb_Image.h"
+#include "Texture.h"
 #include <stdexcept>
 #include <string>
 
-OpenGL::Texture::Texture(std::string_view path) : m_filepath(path)
+OpenGL::Texture::Texture(Texture_buffer buffer) : m_buffer(std::move(buffer))
 {
-    stbi_set_flip_vertically_on_load(1);
-
-    m_local_buffer = stbi_load(path.data(), &m_width, &m_height, &m_bpp, 4);
-
-    if (!has_local_buffer())
-        throw std::invalid_argument("Failed to open texture");
 }
 
 OpenGL::Texture::~Texture()
@@ -20,7 +14,6 @@ OpenGL::Texture::~Texture()
     {
         const uint32_t texture_id = get_id();
         glDeleteTextures(1, &texture_id);
-        release_local_buffer();
     }
 }
 
@@ -29,7 +22,6 @@ void OpenGL::Texture::bind(Texture_slot slot) noexcept
     if (!m_has_been_initialized)
     {
         initialize();
-        release_local_buffer();
     }
 
     m_is_binded = true;
@@ -49,14 +41,9 @@ void OpenGL::Texture::unbind() noexcept
     m_is_binded = false;
 }
 
-int32_t OpenGL::Texture::get_width() const noexcept
-{
-    return m_width;
-}
-
 bool OpenGL::Texture::has_local_buffer() const noexcept
 {
-    return static_cast<bool>(m_local_buffer);
+    return m_buffer.has_buffer();
 }
 
 void OpenGL::Texture::initialize() noexcept
@@ -71,18 +58,15 @@ void OpenGL::Texture::initialize() noexcept
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_local_buffer);
+
+        int32_t width = 0, height = 0;
+        m_buffer.get_dimensions(width, height);
+
+        glTexImage2D(
+            GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_buffer.get_buffer().data());
+
         glGenerateMipmap(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, 0);
         m_has_been_initialized = true;
-    }
-}
-
-void OpenGL::Texture::release_local_buffer() noexcept
-{
-    if (has_local_buffer())
-    {
-        stbi_image_free(m_local_buffer);
-        m_local_buffer = nullptr;
     }
 }

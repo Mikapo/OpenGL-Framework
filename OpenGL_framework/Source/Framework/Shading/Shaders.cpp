@@ -7,10 +7,10 @@
 
 std::unique_ptr<OpenGL::Shader> OpenGL::Shaders::compile_default_shader()
 {
-    std::unique_ptr shader = compile_shader(Default_shader_2d::VERT_SHADER, Default_shader_2d::FRAG_SHADER);
+    std::unique_ptr shader = compile_shader(Default_shader_2d::Source::VERT, Default_shader_2d::Source::FRAG);
 
     const glm::mat4 projection = glm::ortho(-1.0F, 1.0F, -1.0F, 1.0F);
-    shader->set_uniform(Default_shader_2d::PROJECTION_UNIFORM, projection);
+    shader->set_uniform(Default_shader_2d::Uniforms::PROJECTION, projection);
 
     return shader;
 }

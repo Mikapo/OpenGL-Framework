@@ -16,6 +16,7 @@ namespace OpenGL
         [[nodiscard]] static std::unique_ptr<Buffers> create_triangle_buffers();
 
     private:
+        static Vertex_buffer_layout create_2d_layout();
         [[nodiscard]] static std::unique_ptr<Buffers> create_buffers(
             std::vector<float> vertices, std::vector<uint32_t> indices, Vertex_buffer_layout layout);
     };

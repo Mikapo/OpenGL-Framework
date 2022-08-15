@@ -28,6 +28,11 @@ void OpenGL::Shader::unbind() noexcept
     glUseProgram(0);
 }
 
+void OpenGL::Shader::set_sampler_uniform(std::string_view name, Texture_slot slot)
+{
+    set_uniform(name, static_cast<int32_t>(slot));
+}
+
 void OpenGL::Shader::call_gl_uniform(int32_t pos, float value1, float value2, float value3, float value4) noexcept
 {
     glUniform4f(pos, value1, value2, value3, value4);
@@ -113,17 +118,17 @@ uint32_t OpenGL::Shader::compile_shader(uint32_t type, std::string_view source)
 
 uint32_t OpenGL::Shader::create_shader(std::string_view vertex_shader, std::string_view fragment_shader)
 {
-    const uint32_t vs = compile_shader(GL_VERTEX_SHADER, vertex_shader);
-    const uint32_t fs = compile_shader(GL_FRAGMENT_SHADER, fragment_shader);
+    const uint32_t vertex_shader_id = compile_shader(GL_VERTEX_SHADER, vertex_shader);
+    const uint32_t fragment_shader_id = compile_shader(GL_FRAGMENT_SHADER, fragment_shader);
     const uint32_t program = glCreateProgram();
 
-    glAttachShader(program, vs);
-    glAttachShader(program, fs);
+    glAttachShader(program, vertex_shader_id);
+    glAttachShader(program, fragment_shader_id);
     glLinkProgram(program);
     glValidateProgram(program);
 
-    glDeleteShader(vs);
-    glDeleteShader(fs);
+    glDeleteShader(vertex_shader_id);
+    glDeleteShader(fragment_shader_id);
 
     return program;
 }

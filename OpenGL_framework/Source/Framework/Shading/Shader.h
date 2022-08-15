@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Texture/Texture_slots.h"
 #include <array>
 #include <glm/matrix.hpp>
 #include <string>
@@ -8,7 +9,6 @@
 
 namespace OpenGL
 {
-
     class Shader
     {
     public:
@@ -23,6 +23,8 @@ namespace OpenGL
         void bind() const noexcept;
         static void unbind() noexcept;
 
+        void set_sampler_uniform(std::string_view name, Texture_slot slot);
+
         template <typename... Types>
         void set_uniform(std::string_view name, Types... values)
         {
@@ -31,7 +33,7 @@ namespace OpenGL
             if (pos != -1)
             {
                 bind();
-                call_gl_uniform(pos, values...);
+                call_gl_uniform(pos, std::forward<Types>(values)...);
             }
         }
 
