@@ -12,14 +12,14 @@ namespace OpenGL
         void initialize();
         [[nodiscard]] bool has_been_initialized() const noexcept;
 
-        virtual void bind() const noexcept = 0;
-        virtual void unbind() const noexcept = 0;
-
         Renderer_item(const Renderer_item&) = delete;
         Renderer_item(Renderer_item&& other) = delete;
 
         Renderer_item& operator=(const Renderer_item&) = delete;
         Renderer_item& operator=(Renderer_item&& other) = delete;
+
+        virtual void bind() const noexcept = 0;
+        virtual void unbind() const noexcept = 0;
 
     protected:
         Renderer_item() = default;

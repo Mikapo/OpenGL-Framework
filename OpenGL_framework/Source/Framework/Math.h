@@ -9,6 +9,8 @@ namespace OpenGL
     class Math
     {
     public:
+        Math() = delete;
+
         [[nodiscard]] static glm::mat4 calculate_rotation_matrix(glm::vec3 rotation);
         [[nodiscard]] static glm::mat4 calculate_rotation_matrix(float rotation);
 

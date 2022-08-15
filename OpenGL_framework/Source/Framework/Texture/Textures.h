@@ -8,6 +8,8 @@ namespace OpenGL
     class Textures
     {
     public:
+        Textures() = delete;
+
         static std::unique_ptr<Texture> load_texture_from_file(
             std::string_view file_path, Texture_slot slot, bool initialize = true);
         static std::unique_ptr<Texture> create_texture_with_buffer(

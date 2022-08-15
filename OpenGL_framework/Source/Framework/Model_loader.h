@@ -15,6 +15,8 @@ namespace OpenGL
     class Model_loader
     {
     public:
+        Model_loader() = delete;
+
         [[nodiscard]] static std::unique_ptr<Buffers> load(std::string_view file_path, size_t mesh_index);
 
     private:

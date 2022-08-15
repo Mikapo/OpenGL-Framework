@@ -12,9 +12,9 @@ namespace OpenGL
     class Buffers
     {
     public:
-        Buffers(std::vector<float> vertices, std::vector<uint32_t> indices, Vertex_buffer_layout layout);
+        Buffers(std::vector<float> vertices, std::vector<uint32_t> indices, Vertex_buffer_layout layout) noexcept;
 
-        void bind();
+        void bind() const noexcept;
         void unbind() const noexcept;
         [[nodiscard]] size_t get_indices_count() const noexcept;
         void initialize();

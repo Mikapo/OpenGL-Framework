@@ -12,7 +12,7 @@ namespace OpenGL
         Vertex_buffer(std::vector<float> buffer) noexcept;
         ~Vertex_buffer();
         Vertex_buffer(const Vertex_buffer&) = delete;
-        Vertex_buffer(Vertex_buffer&&) = default;
+        Vertex_buffer(Vertex_buffer&&) = delete;
 
         Vertex_buffer& operator=(const Vertex_buffer&) = delete;
         Vertex_buffer& operator=(Vertex_buffer&&) = delete;

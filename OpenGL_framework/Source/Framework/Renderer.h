@@ -8,6 +8,8 @@ namespace OpenGL
     class Renderer
     {
     public:
-        static void draw(Buffers& buffers, const Shader& shader);
+        Renderer() = delete;
+
+        static void draw(const Buffers& buffers, const Shader& shader) noexcept;
     };
 } // namespace OpenGL

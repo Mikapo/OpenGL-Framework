@@ -4,7 +4,7 @@
 #include "Renderer.h"
 #include "Shading/Shader.h"
 
-void OpenGL::Renderer::draw(Buffers& buffers, const Shader& shader)
+void OpenGL::Renderer::draw(const Buffers& buffers, const Shader& shader) noexcept
 {
     buffers.bind();
     shader.bind();
