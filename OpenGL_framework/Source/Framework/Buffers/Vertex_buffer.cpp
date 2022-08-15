@@ -8,6 +8,9 @@ OpenGL::Vertex_buffer::Vertex_buffer(std::vector<float> buffer) noexcept : m_loc
 
 OpenGL::Vertex_buffer::~Vertex_buffer()
 {
+    if (!has_been_initialized())
+        return;
+
     const uint32_t id = get_id();
     glDeleteBuffers(1, &id);
 }

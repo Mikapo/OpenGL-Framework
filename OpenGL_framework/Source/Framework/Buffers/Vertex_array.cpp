@@ -6,11 +6,11 @@
 
 OpenGL::Vertex_array::~Vertex_array()
 {
-    if (has_been_initialized())
-    {
-        const uint32_t array_id = get_id();
-        glDeleteVertexArrays(1, &array_id);
-    }
+    if (!has_been_initialized())
+        return;
+
+    const uint32_t array_id = get_id();
+    glDeleteVertexArrays(1, &array_id);
 }
 
 void OpenGL::Vertex_array::add_buffer(const Vertex_buffer& vertex_buffer, const Vertex_buffer_layout& layout) const

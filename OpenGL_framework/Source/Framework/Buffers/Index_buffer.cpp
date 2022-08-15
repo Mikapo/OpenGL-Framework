@@ -9,6 +9,9 @@ OpenGL::Index_buffer::Index_buffer(std::vector<uint32_t> indices) noexcept
 
 OpenGL::Index_buffer::~Index_buffer()
 {
+    if (!has_been_initialized())
+        return;
+
     const uint32_t buffer_id = get_id();
     glDeleteBuffers(1, &buffer_id);
 }

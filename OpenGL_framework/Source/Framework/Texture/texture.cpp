@@ -10,6 +10,9 @@ OpenGL::Texture::Texture(Texture_buffer buffer, Texture_slot slot) noexcept : m_
 
 OpenGL::Texture::~Texture()
 {
+    if (!has_been_initialized())
+        return;
+
     const uint32_t texture_id = get_id();
     glDeleteTextures(1, &texture_id);
 }
