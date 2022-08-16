@@ -7,8 +7,8 @@
 #include "GL/glew.h"
 #include <GLFW/glfw3.h>
 
-OpenGL::Shader::Shader(std::string_view vert_shader, std::string_view frag_shader)
-    : m_vert_shader(vert_shader), m_frag_shader(frag_shader)
+OpenGL::Shader::Shader(std::string_view vert_shader_source, std::string_view frag_shader_source)
+    : m_vert_shader_source(vert_shader_source), m_frag_shader_source(frag_shader_source)
 {
 }
 
@@ -35,10 +35,10 @@ void OpenGL::Shader::set_sampler_uniform(const std::string& name, Texture_slot s
 
 uint32_t OpenGL::Shader::construct_item()
 {
-    const uint32_t id = create_shader(m_vert_shader, m_frag_shader);
-    glUseProgram(id);
+    const uint32_t shader_id = create_shader(m_vert_shader_source, m_frag_shader_source);
+    glUseProgram(shader_id);
 
-    return id;
+    return shader_id;
 }
 
 void OpenGL::Shader::call_gl_uniform(int32_t pos, float value1, float value2, float value3, float value4) noexcept
@@ -76,11 +76,6 @@ void OpenGL::Shader::call_gl_uniform(int32_t pos, float value) noexcept
 void OpenGL::Shader::call_gl_uniform(int32_t pos, int32_t value) noexcept
 {
     glUniform1i(pos, value);
-}
-
-void OpenGL::Shader::call_gl_uniform(int32_t pos, bool value) noexcept
-{
-    glUniform1i(pos, static_cast<GLint>(value));
 }
 
 void OpenGL::Shader::call_gl_uniform(int32_t pos, const glm::mat4& matrix) noexcept

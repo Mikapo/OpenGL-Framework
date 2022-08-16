@@ -8,13 +8,13 @@ void OpenGL::Texture_buffer::load_buffer_from_file(std::string_view path)
 {
     stbi_set_flip_vertically_on_load(1);
 
-    constexpr int32_t desired_channels = 4;
-    unsigned char* texture_buffer = stbi_load(path.data(), &m_width, &m_height, &m_bpp, desired_channels);
+    int32_t bpp = 0;
+    unsigned char* const texture_buffer = stbi_load(path.data(), &m_width, &m_height, &bpp, DESIRED_CHANNELS);
 
-    if (!texture_buffer)
+    if (texture_buffer == nullptr)
         throw std::invalid_argument("Failed to load the texture");
 
-    const size_t tex_buffer_size = m_width * m_height * desired_channels;
+    const size_t tex_buffer_size = get_correct_buffer_size(m_width, m_height);
     const std::span tex_span = {texture_buffer, tex_buffer_size};
 
     m_buffer.resize(tex_buffer_size);
@@ -23,16 +23,22 @@ void OpenGL::Texture_buffer::load_buffer_from_file(std::string_view path)
     stbi_image_free(texture_buffer);
 }
 
-void OpenGL::Texture_buffer::add_buffer(
-    std::vector<unsigned char> buffer, int32_t tex_width, int32_t tex_height, int32_t tex_channels) noexcept
+void OpenGL::Texture_buffer::add_buffer(std::vector<unsigned char> buffer, int32_t tex_width, int32_t tex_height)
 {
+    if (buffer.size() != get_correct_buffer_size(tex_height, tex_height))
+        throw std::invalid_argument("Buffer is wrong size");
+
     m_buffer = std::move(buffer);
     m_width = tex_width;
     m_height = tex_height;
-    m_bpp = tex_channels;
 }
 
-void OpenGL::Texture_buffer::free_buffer()
+size_t OpenGL::Texture_buffer::get_correct_buffer_size(int32_t tex_width, int32_t tex_height) noexcept
+{
+    return static_cast<size_t>(tex_width * tex_height * DESIRED_CHANNELS);
+}
+
+void OpenGL::Texture_buffer::free_buffer() noexcept
 {
     // frees buffer memory
     std::vector<unsigned char>().swap(m_buffer);

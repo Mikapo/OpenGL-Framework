@@ -11,8 +11,8 @@ OpenGL::Vertex_buffer::~Vertex_buffer()
     if (!has_been_initialized())
         return;
 
-    const uint32_t id = get_id();
-    glDeleteBuffers(1, &id);
+    const uint32_t buffer_id = get_id();
+    glDeleteBuffers(1, &buffer_id);
 }
 
 void OpenGL::Vertex_buffer::bind() const noexcept
@@ -27,13 +27,13 @@ void OpenGL::Vertex_buffer::unbind() const noexcept
 
 uint32_t OpenGL::Vertex_buffer::construct_item()
 {
-    uint32_t id = 0;
-    glGenBuffers(1, &id);
-    glBindBuffer(GL_ARRAY_BUFFER, id);
+    uint32_t buffer_id = 0;
+    glGenBuffers(1, &buffer_id);
+    glBindBuffer(GL_ARRAY_BUFFER, buffer_id);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m_local_buffer.size(), m_local_buffer.data(), GL_STATIC_DRAW);
 
     // frees local buffer
     std::vector<float>().swap(m_local_buffer);
 
-    return id;
+    return buffer_id;
 }

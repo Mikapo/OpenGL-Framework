@@ -13,8 +13,9 @@ namespace OpenGL
     class Shader : public Renderer_item
     {
     public:
-        Shader(std::string_view fert_path, std::string_view frag_shader);
-        ~Shader();
+        Shader(std::string_view fert_shader_source, std::string_view frag_shader_source);
+        ~Shader() override;
+
         Shader(const Shader&) = delete;
         Shader(Shader&&) = delete;
 
@@ -57,7 +58,6 @@ namespace OpenGL
         static void call_gl_uniform(int32_t pos, float value1, float value2) noexcept;
         static void call_gl_uniform(int32_t pos, float value) noexcept;
         static void call_gl_uniform(int32_t pos, int32_t value) noexcept;
-        static void call_gl_uniform(int32_t pos, bool value) noexcept;
         static void call_gl_uniform(int32_t pos, const glm::mat4& matrix) noexcept;
 
         [[nodiscard]] static uint32_t create_shader(std::string_view vertex_shader, std::string_view fragment_shader);
@@ -65,7 +65,7 @@ namespace OpenGL
         [[nodiscard]] int32_t get_uniform_location(const std::string& name);
 
         std::unordered_map<std::string, int32_t> m_uniform_location_cache;
-        std::string m_vert_shader;
-        std::string m_frag_shader;
+        std::string m_vert_shader_source;
+        std::string m_frag_shader_source;
     };
 } // namespace OpenGL

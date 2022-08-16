@@ -21,7 +21,7 @@ void OpenGL::Demo::on_window_open([[maybe_unused]] GLFWwindow* window)
     m_triangle_buffers = Basic_geometry::create_triangle_buffers();
 
     m_shader = Shaders::compile_default_shader();
-    m_shader->set_uniform(Default_shader_2d::Uniforms::PROJECTION, glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f));
+    m_shader->set_uniform(Default_shader_2d::Uniforms::PROJECTION, glm::ortho(-1.0F, 1.0F, -1.0F, 1.0F));
 
     m_texture = Textures::load_texture_from_file("Test_texture.png", Texture_slot::color);
     m_texture->bind();

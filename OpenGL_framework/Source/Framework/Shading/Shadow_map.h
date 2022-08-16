@@ -16,9 +16,9 @@ namespace OpenGL
         ~Shadow_map();
 
         Shadow_map(const Shadow_map&) = delete;
-        Shadow_map(const Shadow_map&&) = delete;
+        Shadow_map(Shadow_map&&) = delete;
         Shadow_map& operator=(const Shadow_map&) = delete;
-        Shadow_map& operator=(const Shadow_map&&) = delete;
+        Shadow_map& operator=(Shadow_map&&) = delete;
 
         void init(std::unique_ptr<Shader> shadow_map_shader, int32_t shadow_width, int32_t shadow_height);
         void bind_frame_buffer() const noexcept;

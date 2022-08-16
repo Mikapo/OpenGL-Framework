@@ -16,9 +16,9 @@ std::unique_ptr<OpenGL::Buffers> OpenGL::Model_loader::load(std::string_view fil
 std::unique_ptr<OpenGL::Buffers> OpenGL::Model_loader::load_buffer(std::string_view file_path, size_t mesh_index)
 {
     Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile(file_path.data(), ASSIMP_LOAD_FLAGS);
+    const aiScene* const scene = importer.ReadFile(file_path.data(), ASSIMP_LOAD_FLAGS);
 
-    if (!scene)
+    if (scene == nullptr)
         throw std::invalid_argument("Failed to open model file");
 
     return load_mesh_from_scene(scene, mesh_index);
@@ -26,7 +26,7 @@ std::unique_ptr<OpenGL::Buffers> OpenGL::Model_loader::load_buffer(std::string_v
 
 std::unique_ptr<OpenGL::Buffers> OpenGL::Model_loader::load_mesh_from_scene(const aiScene* scene, size_t index)
 {
-    if (!scene)
+    if (scene == nullptr)
         throw std::invalid_argument("Scene was null");
 
     const std::span meshes = {scene->mMeshes, scene->mNumMeshes};
@@ -52,8 +52,8 @@ std::unique_ptr<OpenGL::Buffers> OpenGL::Model_loader::load_mesh_from_scene(cons
 
 void OpenGL::Model_loader::get_indices(const aiMesh* mesh, std::vector<uint32_t>& out_vector)
 {
-    if (!mesh)
-        throw std::invalid_argument("mesh was null");
+    if (mesh == nullptr)
+        throw std::invalid_argument("Mesh was null");
 
     const std::span faces = {mesh->mFaces, mesh->mNumFaces};
 
@@ -71,11 +71,11 @@ void OpenGL::Model_loader::get_indices(const aiMesh* mesh, std::vector<uint32_t>
 
 void OpenGL::Model_loader::get_vertices(aiMesh* mesh, std::vector<float>& out_vector)
 {
-    if (!mesh)
-        throw std::invalid_argument("mesh is null");
+    if (mesh == nullptr)
+        throw std::invalid_argument("Mesh is null");
 
     if (!mesh->HasNormals())
-        throw std::invalid_argument("mesh is missing normals");
+        throw std::invalid_argument("Mesh is missing normals");
 
     const std::span vertices = {mesh->mVertices, mesh->mNumVertices};
     const std::span normals = {mesh->mNormals, mesh->mNumVertices};
@@ -85,7 +85,8 @@ void OpenGL::Model_loader::get_vertices(aiMesh* mesh, std::vector<float>& out_ve
     if (mesh->HasTextureCoords(0))
         texture_coordinates = {mesh->mTextureCoords[0], vertices.size()};
 
-    out_vector.reserve(vertices.size() * 8);
+    constexpr size_t values_per_vertice = 8;
+    out_vector.reserve(vertices.size() * values_per_vertice);
 
     for (int32_t i = 0; i < vertices.size(); i++)
     {

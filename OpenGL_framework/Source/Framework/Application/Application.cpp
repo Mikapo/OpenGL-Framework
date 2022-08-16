@@ -1,7 +1,8 @@
 ﻿#include "Application.h"
 
-#include <GLFW/glfw3.h>
-#include <GLFW/glfw3native.h>
+#include "GLFW/glfw3.h"
+#include "GLFW/glfw3native.h"
+#include <stdexcept>
 
 void OpenGL::Application::start()
 {
@@ -15,6 +16,11 @@ void OpenGL::Application::start()
     }
 }
 
+GLFWwindow* OpenGL::Application::get_window() const noexcept
+{
+    return m_window;
+}
+
 void OpenGL::Application::get_window_dimensions(int32_t& out_width, int32_t& out_height) const noexcept
 {
     out_width = m_width;
@@ -25,29 +31,39 @@ void OpenGL::Application::init()
 {
     glfwInit();
 
-    /* Create a windowed mode window and its OpenGL context */
+    // Create a windowed mode window and its OpenGL context
     glfwWindowHint(GLFW_SAMPLES, 4);
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
     m_window = glfwCreateWindow(m_width, m_height, m_name.c_str(), nullptr, nullptr);
 
-    if (!m_window)
+    if (m_window == nullptr)
     {
         glfwTerminate();
+        throw std::runtime_error("Window was not correctly created");
     }
 
-    /* Make the window's context current */
+    // Make the window's context current
     glfwMakeContextCurrent(m_window);
 
-    glewInit();
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_MULTISAMPLE);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    // limiting render framerate to screens framerame
     glfwSwapInterval(1);
+
     glfwSetWindowUserPointer(get_window(), this);
+
+    glewInit();
+    setup_opengl_settings();
     setup_callbacks();
 
     if (m_on_window_open_callback)
         m_on_window_open_callback(m_window);
+}
+
+void OpenGL::Application::setup_opengl_settings() noexcept
+{
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_MULTISAMPLE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glDepthMask(GL_TRUE);
 }
 
 void OpenGL::Application::on_window_resize([[maybe_unused]] GLFWwindow* window, int32_t new_width, int32_t new_height)
@@ -71,8 +87,13 @@ void OpenGL::Application::set_window_dimensions(int32_t width, int32_t height) n
     m_width = width;
     m_height = height;
 
-    if (m_window)
+    if (m_window != nullptr)
         glfwSetWindowSize(m_window, width, height);
+}
+
+void OpenGL::Application::set_window_background_color(Window_background_color new_color) noexcept
+{
+    m_background_color = new_color;
 }
 
 void OpenGL::Application::set_window_title(std::string_view name)
@@ -95,13 +116,12 @@ void OpenGL::Application::setup_callbacks() const noexcept
 
 void OpenGL::Application::render_loop()
 {
-    while (!glfwWindowShouldClose(m_window))
+    while (glfwWindowShouldClose(m_window) == 0)
     {
         glViewport(0, 0, m_width, m_height);
         glfwPollEvents();
-        glDepthMask(GL_TRUE);
-        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         glClearColor(m_background_color.r, m_background_color.b, m_background_color.g, m_background_color.a);
+        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
         if (m_render_callback)
             m_render_callback();
