@@ -1,11 +1,8 @@
-#include "Shader.h"
-
-#include <fstream>
-#include <iostream>
-#include <sstream>
-
 #include "GL/glew.h"
-#include <GLFW/glfw3.h>
+
+#include "Shader.h"
+#include <memory>
+#include <stdexcept>
 
 OpenGL::Shader::Shader(std::string_view vert_shader_source, std::string_view frag_shader_source)
     : m_vert_shader_source(vert_shader_source), m_frag_shader_source(frag_shader_source)
@@ -102,20 +99,21 @@ uint32_t OpenGL::Shader::compile_shader(uint32_t type, std::string_view source)
     glShaderSource(Shader_id, 1, &src, nullptr);
     glCompileShader(Shader_id);
 
-    int32_t result = 0;
-    glGetShaderiv(Shader_id, GL_COMPILE_STATUS, &result);
-    if (result == GL_FALSE)
+    int32_t compile_result = 0;
+    glGetShaderiv(Shader_id, GL_COMPILE_STATUS, &compile_result);
+
+    // Shadet compilation error handling
+    if (compile_result == GL_FALSE)
     {
         int32_t lenght = 0;
         glGetShaderiv(Shader_id, GL_INFO_LOG_LENGTH, &lenght);
 
-        std::vector<char> message_buffer;
-        message_buffer.resize(lenght);
+        std::unique_ptr message_buffer = std::make_unique<char[]>(lenght);
 
-        glGetShaderInfoLog(Shader_id, lenght, &lenght, message_buffer.data());
+        glGetShaderInfoLog(Shader_id, lenght, &lenght, message_buffer.get());
         glDeleteShader(Shader_id);
 
-        throw std::invalid_argument(message_buffer.data());
+        throw std::invalid_argument(message_buffer.get());
     }
 
     return Shader_id;

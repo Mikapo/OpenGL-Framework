@@ -10,6 +10,7 @@ namespace OpenGL
     public:
         Vertex_array() = default;
         ~Vertex_array() override;
+
         Vertex_array(const Vertex_array&) = delete;
         Vertex_array(Vertex_array&&) = delete;
 

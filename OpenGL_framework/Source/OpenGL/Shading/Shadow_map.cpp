@@ -7,10 +7,7 @@
 OpenGL::Shadow_map::~Shadow_map()
 {
     if (m_has_been_initialized)
-    {
-        glDeleteTextures(1, &m_depth_map);
-        m_shader.reset();
-    }
+        glDeleteTextures(1, &m_depth_map_id);
 }
 
 void OpenGL::Shadow_map::init(std::unique_ptr<Shader> shadow_map_shader, int32_t shadow_width, int32_t shadow_height)
@@ -22,8 +19,8 @@ void OpenGL::Shadow_map::init(std::unique_ptr<Shader> shadow_map_shader, int32_t
     m_shadow_height = shadow_height;
 
     m_shader = std::move(shadow_map_shader);
-    m_depth_map = create_depth_map_texture(shadow_width, shadow_height);
-    initialize_frame_buffer(m_depth_map);
+    m_depth_map_id = create_depth_map_texture(shadow_width, shadow_height);
+    initialize_frame_buffer(m_depth_map_id);
     m_has_been_initialized = true;
 }
 
@@ -65,13 +62,13 @@ void OpenGL::Shadow_map::unbind_frame_buffer() noexcept
     m_frame_buffer.unbind();
 }
 
-void OpenGL::Shadow_map::bind_texture(Texture_slot slot) const noexcept
+void OpenGL::Shadow_map::bind_depth_map(Texture_slot slot) const noexcept
 {
     glActiveTexture(GL_TEXTURE0 + static_cast<int32_t>(slot));
-    glBindTexture(GL_TEXTURE_2D, m_depth_map);
+    glBindTexture(GL_TEXTURE_2D, m_depth_map_id);
 }
 
-void OpenGL::Shadow_map::unbind_texture() noexcept
+void OpenGL::Shadow_map::unbind_depth_map() noexcept
 {
     glBindTexture(GL_TEXTURE_2D, 0);
 }

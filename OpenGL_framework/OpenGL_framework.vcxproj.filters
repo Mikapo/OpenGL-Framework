@@ -15,55 +15,55 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Framework\Buffers\Buffers.h">
+    <ClInclude Include="Source\OpenGL\Buffers\Buffers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Buffers\Index_buffer.h">
+    <ClInclude Include="Source\OpenGL\Buffers\Index_buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Buffers\Vertex_array.h">
+    <ClInclude Include="Source\OpenGL\Buffers\Vertex_array.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Buffers\Vertex_buffer.h">
+    <ClInclude Include="Source\OpenGL\Buffers\Vertex_buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Shading\Shader.h">
+    <ClInclude Include="Source\OpenGL\Shading\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Shading\Shadow_map.h">
+    <ClInclude Include="Source\OpenGL\Shading\Shadow_map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Texture\Texture.h">
+    <ClInclude Include="Source\OpenGL\Texture\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Texture\Texture_slots.h">
+    <ClInclude Include="Source\OpenGL\Texture\Texture_slots.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Model_loader.h">
+    <ClInclude Include="Source\OpenGL\Model_loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Renderer_item.h">
+    <ClInclude Include="Source\OpenGL\Renderer_item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Application\Application.h">
+    <ClInclude Include="Source\OpenGL\Application\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Application\Key.h">
+    <ClInclude Include="Source\OpenGL\Application\Key.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Renderer.h">
+    <ClInclude Include="Source\OpenGL\Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Basic_geometry.h">
+    <ClInclude Include="Source\OpenGL\Basic_geometry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Shading\Default_shaders\2d_shader.h">
+    <ClInclude Include="Source\OpenGL\Shading\Default_shaders\2d_shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Shading\Shaders.h">
+    <ClInclude Include="Source\OpenGL\Shading\Shaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Math.h">
+    <ClInclude Include="Source\OpenGL\Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vendor\glm\detail\_features.hpp">
@@ -915,66 +915,66 @@
     <ClInclude Include="Vendor\stb_image\stb_Image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Demo.h">
+    <ClInclude Include="Source\OpenGL\Demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Texture\Texture_buffer.h">
+    <ClInclude Include="Source\OpenGL\Texture\Texture_buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Texture\Textures.h">
+    <ClInclude Include="Source\OpenGL\Texture\Textures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Buffers\Frame_buffer.h">
+    <ClInclude Include="Source\OpenGL\Buffers\Frame_buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Layout\Vertex_buffer_elements.h">
+    <ClInclude Include="Source\OpenGL\Layout\Vertex_buffer_elements.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Layout\Vertex_buffer_layout.h">
+    <ClInclude Include="Source\OpenGL\Layout\Vertex_buffer_layout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Framework\Buffers\Index_buffer.cpp">
+    <ClCompile Include="Source\OpenGL\Buffers\Index_buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Buffers\Vertex_array.cpp">
+    <ClCompile Include="Source\OpenGL\Buffers\Vertex_array.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Buffers\Vertex_buffer.cpp">
+    <ClCompile Include="Source\OpenGL\Buffers\Vertex_buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Shading\Shader.cpp">
+    <ClCompile Include="Source\OpenGL\Shading\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Shading\Shadow_map.cpp">
+    <ClCompile Include="Source\OpenGL\Shading\Shadow_map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Texture\Texture.cpp">
+    <ClCompile Include="Source\OpenGL\Texture\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Model_loader.cpp">
+    <ClCompile Include="Source\OpenGL\Model_loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Renderer_item.cpp">
+    <ClCompile Include="Source\OpenGL\Renderer_item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Application\Application.cpp">
+    <ClCompile Include="Source\OpenGL\Application\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Buffers\Buffers.cpp">
+    <ClCompile Include="Source\OpenGL\Buffers\Buffers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Renderer.cpp">
+    <ClCompile Include="Source\OpenGL\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Basic_geometry.cpp">
+    <ClCompile Include="Source\OpenGL\Basic_geometry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Shading\Shaders.cpp">
+    <ClCompile Include="Source\OpenGL\Shading\Shaders.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Math.cpp">
+    <ClCompile Include="Source\OpenGL\Math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Main.cpp">
@@ -986,22 +986,22 @@
     <ClCompile Include="Vendor\stb_image\stb_image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Demo.cpp">
+    <ClCompile Include="Source\OpenGL\Demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Texture\Texture_buffer.cpp">
+    <ClCompile Include="Source\OpenGL\Texture\Texture_buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Texture\Textures.cpp">
+    <ClCompile Include="Source\OpenGL\Texture\Textures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Buffers\Frame_buffer.cpp">
+    <ClCompile Include="Source\OpenGL\Buffers\Frame_buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Layout\Vertex_buffer_elements.cpp">
+    <ClCompile Include="Source\OpenGL\Layout\Vertex_buffer_elements.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framework\Layout\Vertex_buffer_layout.cpp">
+    <ClCompile Include="Source\OpenGL\Layout\Vertex_buffer_layout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

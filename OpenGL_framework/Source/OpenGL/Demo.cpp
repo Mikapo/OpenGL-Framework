@@ -9,6 +9,7 @@
 
 void OpenGL::Demo::run()
 {
+    // Settupping application and starting it
     application.set_on_window_open_callback([this](GLFWwindow* window) { on_window_open(window); });
     application.set_render_callback([this] { render(); });
     application.set_window_title("Demo");
@@ -17,18 +18,27 @@ void OpenGL::Demo::run()
 
 void OpenGL::Demo::on_window_open([[maybe_unused]] GLFWwindow* window)
 {
+    /*
+    You can only use OpenGL after window has been created
+    And only in thread where you started application
+     */
+
+    // Creating Buffers to render
     m_square_buffers = Basic_geometry::create_square_buffers();
     m_triangle_buffers = Basic_geometry::create_triangle_buffers();
 
+    // Compiling shader and setting projection matrix on it
     m_shader = Shaders::compile_default_shader();
     m_shader->set_uniform(Default_shader_2d::Uniforms::PROJECTION, glm::ortho(-1.0F, 1.0F, -1.0F, 1.0F));
 
+    // Loading examble texture and binding it
     m_texture = Textures::load_texture_from_file("Test_texture.png", Texture_slot::color);
     m_texture->bind();
 }
 
 void OpenGL::Demo::render()
 {
+    // OpenGL logo render
     glm::mat4 model = Math::calculate_model({0.4F, 0.4F}, 45.0F, {1.0F, 0.5F});
     m_shader->set_uniform(Default_shader_2d::Uniforms::MODEL, model);
     m_shader->set_uniform(Default_shader_2d::Uniforms::USES_TEXTURE, 1);
@@ -36,6 +46,7 @@ void OpenGL::Demo::render()
 
     Renderer::draw(*m_square_buffers, *m_shader);
 
+    // Triangle render
     model = Math::calculate_model({-0.3F, -0.3F});
     m_shader->set_uniform(Default_shader_2d::Uniforms::MODEL, model);
     m_shader->set_uniform(Default_shader_2d::Uniforms::USES_TEXTURE, 0);

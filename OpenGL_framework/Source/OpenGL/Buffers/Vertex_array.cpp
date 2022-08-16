@@ -18,7 +18,9 @@ void OpenGL::Vertex_array::add_buffer(const Vertex_buffer& vertex_buffer, const 
     bind();
     vertex_buffer.bind();
     const auto& elements = layout.get_elements();
-    uint32_t offset = 0;
+
+    // Pointer that is used to spesify offset of each element
+    char* offset_ptr = nullptr;
 
     for (GLuint i = 0; i < elements.size(); i++)
     {
@@ -26,10 +28,15 @@ void OpenGL::Vertex_array::add_buffer(const Vertex_buffer& vertex_buffer, const 
         glEnableVertexAttribArray(i);
 
         glVertexAttribPointer(
-            i, static_cast<GLint>(element.get_count()), element.get_type(), element.get_normalized(),
-            static_cast<GLsizei>(layout.get_stride()), reinterpret_cast<const void*>(offset));
+            i,                                         // Index
+            static_cast<GLint>(element.get_count()),   // Zmount of values in element. Must be 1 - 4
+            element.get_type(),                        // Type of element
+            element.get_normalized(),                  // Normalized bettween 0 and 1
+            static_cast<GLsizei>(layout.get_stride()), // Size of vertex
+            offset_ptr);                               // Offset of element in vertex
 
-        offset += element.get_count() * Vertex_buffer_elements::get_size_of_type(element.get_type());
+        // Adds offset to pointer
+        offset_ptr += element.get_count() * Vertex_buffer_elements::get_size_of_type(element.get_type());
     }
 }
 

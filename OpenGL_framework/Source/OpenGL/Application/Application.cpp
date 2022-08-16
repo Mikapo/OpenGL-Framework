@@ -1,7 +1,8 @@
-﻿#include "Application.h"
+﻿#define GLEW_STATIC
 
-#include "GLFW/glfw3.h"
-#include "GLFW/glfw3native.h"
+#include "GL/glew.h"
+
+#include "Application.h"
 #include <stdexcept>
 
 void OpenGL::Application::start()

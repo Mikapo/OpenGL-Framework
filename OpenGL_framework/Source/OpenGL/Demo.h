@@ -18,6 +18,8 @@ namespace OpenGL
         void render();
 
         Application application;
+
+        // Different objects used for rendering
         std::unique_ptr<Buffers> m_square_buffers = nullptr;
         std::unique_ptr<Buffers> m_triangle_buffers = nullptr;
         std::unique_ptr<Shader> m_shader = nullptr;

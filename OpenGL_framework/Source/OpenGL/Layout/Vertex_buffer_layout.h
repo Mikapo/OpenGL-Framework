@@ -13,6 +13,8 @@ namespace OpenGL
         void push_ubyte(int32_t count);
 
         [[nodiscard]] const std::vector<Vertex_buffer_elements>& get_elements() const noexcept;
+
+        // Size of vertex using this layout
         [[nodiscard]] uint32_t get_stride() const noexcept;
 
     private:

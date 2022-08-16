@@ -14,9 +14,15 @@ namespace OpenGL
     public:
         Buffers(std::vector<float> vertices, std::vector<uint32_t> indices, Vertex_buffer_layout layout) noexcept;
 
+        // Binds vertex array and index buffer
         void bind() const noexcept;
+
+        // Unbinds vertex array and index buffer
         void unbind() const noexcept;
+
         [[nodiscard]] size_t get_indices_count() const noexcept;
+
+        // Initializes all buffers
         void initialize();
 
     private:

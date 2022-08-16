@@ -23,8 +23,8 @@ namespace OpenGL
         void init(std::unique_ptr<Shader> shadow_map_shader, int32_t shadow_width, int32_t shadow_height);
         void bind_frame_buffer() const noexcept;
         void unbind_frame_buffer() noexcept;
-        void bind_texture(Texture_slot slot) const noexcept;
-        static void unbind_texture() noexcept;
+        void bind_depth_map(Texture_slot slot) const noexcept;
+        static void unbind_depth_map() noexcept;
         [[nodiscard]] Shader* get_shader() const noexcept;
         void get_shadow_resolution(int32_t& out_width, int32_t& out_height) const noexcept;
 
@@ -36,6 +36,6 @@ namespace OpenGL
         int32_t m_shadow_width = 0, m_shadow_height = 0;
         std::unique_ptr<Shader> m_shader = nullptr;
         Frame_buffer m_frame_buffer;
-        uint32_t m_depth_map = 0;
+        uint32_t m_depth_map_id = 0;
     };
 } // namespace OpenGL

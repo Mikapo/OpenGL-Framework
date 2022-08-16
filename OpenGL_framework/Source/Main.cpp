@@ -1,7 +1,16 @@
-#include "Framework/Demo.h"
+#include "OpenGL/Demo.h"
+#include <iostream>
 
 int main()
 {
-    OpenGL::Demo demo;
-    demo.run();
+    try
+    {
+        OpenGL::Demo demo;
+        demo.run();
+    }
+    catch (const std::exception& exception)
+    {
+        std::cerr << "Exception: " << exception.what();
+        std::cin.get();
+    }
 }

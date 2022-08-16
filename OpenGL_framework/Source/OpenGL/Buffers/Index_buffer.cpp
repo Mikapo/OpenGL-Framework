@@ -38,10 +38,12 @@ uint32_t OpenGL::Index_buffer::construct_item()
     glGenBuffers(1, &buffer_id);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer_id);
     glBufferData(
-        GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(sizeof(uint32_t) * m_count), m_local_buffer.data(),
-        GL_STATIC_DRAW);
+        GL_ELEMENT_ARRAY_BUFFER,                             // Buffer Type
+        static_cast<GLsizeiptr>(sizeof(uint32_t) * m_count), // Buffer Size
+        m_local_buffer.data(),                               // Buffer Data
+        GL_STATIC_DRAW);                                     // Buffer will be static
 
-    // frees local buffer
+    // Frees local buffer
     std::vector<uint32_t>().swap(m_local_buffer);
 
     return buffer_id;

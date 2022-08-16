@@ -25,6 +25,7 @@ namespace OpenGL
         void bind() const noexcept override;
         void unbind() const noexcept override;
 
+        // Set 2D sampler unfiorm
         void set_sampler_uniform(const std::string& name, Texture_slot slot);
 
         template <typename... Types>

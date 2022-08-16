@@ -19,6 +19,8 @@ namespace OpenGL
     private:
         static std::unique_ptr<Shader> compile_shader(
             std::string_view vert_shader, std::string_view frag_shader, bool initialize);
+
+        // Loads shader source from file
         static std::string parse_shader(std::string_view file_path);
     };
 } // namespace OpenGL
