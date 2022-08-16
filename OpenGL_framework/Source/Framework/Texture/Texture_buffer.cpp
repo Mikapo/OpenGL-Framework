@@ -34,8 +34,8 @@ void OpenGL::Texture_buffer::add_buffer(
 
 void OpenGL::Texture_buffer::free_buffer()
 {
-    m_buffer.resize(0);
-    m_buffer.shrink_to_fit();
+    // frees buffer memory
+    std::vector<unsigned char>().swap(m_buffer);
 }
 
 const std::vector<unsigned char>& OpenGL::Texture_buffer::get_buffer() const noexcept

@@ -32,8 +32,8 @@ uint32_t OpenGL::Vertex_buffer::construct_item()
     glBindBuffer(GL_ARRAY_BUFFER, id);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m_local_buffer.size(), m_local_buffer.data(), GL_STATIC_DRAW);
 
-    m_local_buffer.clear();
-    m_local_buffer.shrink_to_fit();
+    // frees local buffer
+    std::vector<float>().swap(m_local_buffer);
 
     return id;
 }

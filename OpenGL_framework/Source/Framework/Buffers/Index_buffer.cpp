@@ -41,7 +41,8 @@ uint32_t OpenGL::Index_buffer::construct_item()
         GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(sizeof(uint32_t) * m_count), m_local_buffer.data(),
         GL_STATIC_DRAW);
 
-    m_local_buffer.clear();
+    // frees local buffer
+    std::vector<uint32_t>().swap(m_local_buffer);
 
     return buffer_id;
 }
