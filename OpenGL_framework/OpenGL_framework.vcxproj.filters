@@ -933,6 +933,12 @@
     <ClInclude Include="Source\OpenGL\Layout\Vertex_buffer_layout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\OpenGL\Texture\Texture_base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\OpenGL\Texture\Depth_map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\OpenGL\Buffers\Index_buffer.cpp">
@@ -1002,6 +1008,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\OpenGL\Layout\Vertex_buffer_layout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OpenGL\Texture\Texture_base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OpenGL\Texture\Depth_map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

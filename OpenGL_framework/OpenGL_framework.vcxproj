@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source\OpenGL\Texture\Depth_map.h" />
     <ClInclude Include="Source\OpenGL\Buffers\Frame_buffer.h" />
     <ClInclude Include="Source\OpenGL\Demo.h" />
     <ClInclude Include="Source\OpenGL\Math.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Source\OpenGL\Texture\Texture_slots.h" />
     <ClInclude Include="Source\OpenGL\Texture\Texture_buffer.h" />
     <ClInclude Include="Source\OpenGL\Texture\Textures.h" />
+    <ClInclude Include="Source\OpenGL\Texture\Texture_base.h" />
     <ClInclude Include="Vendor\glm\common.hpp" />
     <ClInclude Include="Vendor\glm\detail\compute_common.hpp" />
     <ClInclude Include="Vendor\glm\detail\compute_vector_relational.hpp" />
@@ -457,6 +459,7 @@
     <ClInclude Include="Source\OpenGL\Layout\Vertex_buffer_layout.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\OpenGL\Texture\Depth_map.cpp" />
     <ClCompile Include="Source\OpenGL\Buffers\Frame_buffer.cpp" />
     <ClCompile Include="Source\OpenGL\Demo.cpp" />
     <ClCompile Include="Source\OpenGL\Math.cpp" />
@@ -476,6 +479,7 @@
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\OpenGL\Texture\Texture_buffer.cpp" />
     <ClCompile Include="Source\OpenGL\Texture\Textures.cpp" />
+    <ClCompile Include="Source\OpenGL\Texture\Texture_base.cpp" />
     <ClCompile Include="Vendor\glm\detail\glm.cpp" />
     <ClCompile Include="Vendor\stb_image\stb_image.cpp" />
     <ClCompile Include="Source\OpenGL\Layout\Vertex_buffer_elements.cpp" />

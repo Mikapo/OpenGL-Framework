@@ -4,35 +4,15 @@
 #include <stdexcept>
 #include <string>
 
-OpenGL::Texture::Texture(Texture_buffer buffer, Texture_slot slot) noexcept : m_buffer(std::move(buffer)), m_slot(slot)
+OpenGL::Texture::Texture(Texture_buffer buffer, Texture_slot slot)
+    : Texture_base(slot), m_buffer(std::move(buffer))
 {
-}
-
-OpenGL::Texture::~Texture()
-{
-    if (!has_been_initialized())
-        return;
-
-    const uint32_t texture_id = get_id();
-    glDeleteTextures(1, &texture_id);
-}
-
-void OpenGL::Texture::bind() const noexcept
-{
-    glActiveTexture(GL_TEXTURE0 + static_cast<uint8_t>(m_slot));
-    glBindTexture(GL_TEXTURE_2D, get_id());
-}
-
-void OpenGL::Texture::unbind() const noexcept
-{
-    glActiveTexture(GL_TEXTURE0 + static_cast<uint8_t>(m_slot));
-    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 uint32_t OpenGL::Texture::construct_item()
 {
-    uint32_t texture_id = 0;
-    glGenTextures(1, &texture_id);
+    const uint32_t texture_id = Texture_base::construct_item();
+
     glBindTexture(GL_TEXTURE_2D, texture_id);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
