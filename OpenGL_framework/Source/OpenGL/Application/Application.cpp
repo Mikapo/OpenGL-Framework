@@ -55,8 +55,7 @@ void OpenGL::Application::init()
     setup_opengl_settings();
     setup_callbacks();
 
-    if (m_on_window_open_callback)
-        m_on_window_open_callback(m_window);
+    m_on_window_open.broadcast();
 }
 
 void OpenGL::Application::setup_opengl_settings() noexcept
@@ -72,15 +71,13 @@ void OpenGL::Application::on_window_resize([[maybe_unused]] GLFWwindow* window, 
     m_width = new_width;
     m_height = new_height;
 
-    if (m_window_resize_callback)
-        m_window_resize_callback(new_width, new_height);
+    m_on_window_rezise.broadcast(new_width, new_height);
 }
 
 void OpenGL::Application::on_key_event(
     int32_t key, [[maybe_unused]] int32_t scancode, int32_t action, [[maybe_unused]] int32_t mods)
 {
-    if (m_on_key_event_callback)
-        m_on_key_event_callback(static_cast<Input_key>(key), static_cast<Input_action>(action));
+    m_on_input.broadcast(static_cast<Input_key>(key), static_cast<Input_action>(action));
 }
 
 void OpenGL::Application::set_window_dimensions(int32_t width, int32_t height) noexcept
@@ -123,19 +120,14 @@ void OpenGL::Application::render_loop()
         glfwPollEvents();
         glClearColor(m_background_color.r, m_background_color.b, m_background_color.g, m_background_color.a);
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-
-        if (m_render_callback)
-            m_render_callback();
-
+        m_on_render.broadcast();
         glfwSwapBuffers(m_window);
     }
 }
 
 void OpenGL::Application::cleanup()
 {
-    if (m_cleanup_callback)
-        m_cleanup_callback();
-
+    m_on_cleanup.broadcast();
     glfwDestroyWindow(m_window);
     glfwTerminate();
 

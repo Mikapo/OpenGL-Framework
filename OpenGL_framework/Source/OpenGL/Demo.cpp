@@ -10,13 +10,13 @@
 void OpenGL::Demo::run()
 {
     // Settupping application and starting it
-    application.set_on_window_open_callback([this](GLFWwindow* window) { on_window_open(window); });
-    application.set_render_callback([this] { render(); });
+    application.m_on_window_open.set_callback(this, &Demo::on_window_open);
+    application.m_on_render.set_callback(this, &Demo::render);
     application.set_window_title("Demo");
     application.start();
 }
 
-void OpenGL::Demo::on_window_open([[maybe_unused]] GLFWwindow* window)
+void OpenGL::Demo::on_window_open()
 {
     /*
     You can only use OpenGL after window has been created

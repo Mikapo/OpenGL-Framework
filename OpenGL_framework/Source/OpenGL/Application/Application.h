@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Events/Delegate.h"
 #include "Key.h"
 #include <functional>
 #include <memory>
@@ -22,36 +23,6 @@ namespace OpenGL
     public:
         void start();
 
-        template <typename Func_type>
-        void set_on_window_open_callback(const Func_type& func)
-        {
-            m_on_window_open_callback = func;
-        }
-
-        template <typename Func_type>
-        void set_render_callback(const Func_type& func)
-        {
-            m_render_callback = func;
-        }
-
-        template <typename Func_type>
-        void set_cleanup_callback(const Func_type& func)
-        {
-            m_cleanup_callback = func;
-        }
-
-        template <typename Func_type>
-        void set_on_key_event_callback(const Func_type& func)
-        {
-            m_on_key_event_callback = func;
-        }
-
-        template <typename Func_type>
-        void set_window_resize_callback(const Func_type& func)
-        {
-            m_window_resize_callback = func;
-        }
-
         [[nodiscard]] GLFWwindow* get_window() const noexcept;
         void get_window_dimensions(int32_t& out_width, int32_t& out_height) const noexcept;
         void set_window_dimensions(int32_t width, int32_t height) noexcept;
@@ -59,6 +30,13 @@ namespace OpenGL
 
         // Needs to be called before start is called
         void set_window_title(std::string_view name);
+
+         // Callbacks
+        Delegate<> m_on_window_open;
+        Delegate<> m_on_render;
+        Delegate<> m_on_cleanup;
+        Delegate<int32_t, int32_t> m_on_window_rezise;
+        Delegate<Input_key, Input_action> m_on_input;
 
     private:
         void setup_callbacks() const noexcept;
@@ -77,13 +55,6 @@ namespace OpenGL
 
         GLFWwindow* m_window = nullptr;
         bool m_has_started = false;
-
-        // Callbacks
-        std::function<void(GLFWwindow*)> m_on_window_open_callback;
-        std::function<void()> m_render_callback;
-        std::function<void()> m_cleanup_callback;
-        std::function<void(int32_t, int32_t)> m_window_resize_callback;
-        std::function<void(Input_key, Input_action)> m_on_key_event_callback;
     };
 
 } // namespace OpenGL

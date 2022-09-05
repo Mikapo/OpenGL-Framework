@@ -14,7 +14,7 @@ namespace OpenGL
         void run();
 
     private:
-        void on_window_open(GLFWwindow* window);
+        void on_window_open();
         void render();
 
         Application application;
